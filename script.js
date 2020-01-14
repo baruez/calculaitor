@@ -1,7 +1,7 @@
 var current = "0";
 var stored = "0";
 var current_op;
-var decimal = 0;
+var decimal = false;
 var needs_clear = false
 
 
@@ -79,9 +79,9 @@ function press_equal(){
 
 
 function add_decimal(){
-  if (decimal === 0){
+  if (!decimal){
      current = current + ".";
-     decimal = 1;
+     decimal = true;
   } else return;
   refresh();
 }
@@ -90,14 +90,12 @@ function add_decimal(){
 function press_number(number){
   if (needs_clear) {
     current = "0"
-    decimal = 0;
+    decimal = false;
     needs_clear = false
   }
   if (number === "0" && current === "0") return;
   if (number != "0" && current === "0") current = number;
   else current = current + number;
-  current = parseFloat(current)
-  current = parseFloat(current.toFixed(6))
   refresh();
 }
 
@@ -105,7 +103,7 @@ function clear(){
   current = "0"
   stored = "0"
   current_op = ""
-  decimal = 0;
+  decimal = false;
   refresh();
 }
 
