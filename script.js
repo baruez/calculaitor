@@ -1,192 +1,126 @@
-var currentDisplayed = "0";
-var maxDecimals = 0;
-var button0 = document.getElementById("button0")
-var button1 = document.getElementById("button1")
-var button2 = document.getElementById("button2")
-var button3 = document.getElementById("button3")
-var button4 = document.getElementById("button4")
-var button5 = document.getElementById("button5")
-var button6 = document.getElementById("button6")
-var button7 = document.getElementById("button7")
-var button8 = document.getElementById("button8")
-var button9 = document.getElementById("button9")
-var buttondec = document.getElementById("buttondec")
-var buttonC = document.getElementById("buttonC")
-var buttonUN = document.getElementById("buttonUN")
-var buttoneq = document.getElementById("buttoneq")
-var buttondiv = document.getElementById("buttondiv")
-var buttonX = document.getElementById("buttonX")
-var buttonsub = document.getElementById("buttonsub")
-var buttonsum = document.getElementById("buttonsum")
-var buttonmod = document.getElementById("buttonmod")
+var current = "0";
+var stored = "0";
+var current_op;
+var decimal = 0;
+var needs_clear = false
 
-button0.addEventListener("click", function(){
-  if(currentDisplayed === "0") document.getElementById("display").innerHTML = currentDisplayed;
-  else if (currentDisplayed === "+" || currentDisplayed === "-" || currentDisplayed === "*"
-  || currentDisplayed === "/" || currentDisplayed === "%") {
-    currentDisplayed = "0"
-    document.getElementById("display").innerHTML = currentDisplayed;
-  }
-  else{
-    currentDisplayed = currentDisplayed + "0";
-    document.getElementById("display").innerHTML = currentDisplayed;
-  }
-})
-button1.addEventListener("click", function(){
-  if(currentDisplayed === "0" || currentDisplayed === "+" || currentDisplayed === "-"
-    || currentDisplayed === "*" || currentDisplayed === "/" || currentDisplayed === "%") {
-    currentDisplayed = "1"
-    document.getElementById("display").innerHTML = currentDisplayed;
-  }
-  else{
-    currentDisplayed = currentDisplayed + "1";
-    document.getElementById("display").innerHTML = currentDisplayed;
-  }
-})
-button2.addEventListener("click", function(){
-  if(currentDisplayed === "0" || currentDisplayed === "+" || currentDisplayed === "-"
-    || currentDisplayed === "*" || currentDisplayed === "/" || currentDisplayed === "%") {
-    currentDisplayed = "2"
-    document.getElementById("display").innerHTML = currentDisplayed;
-  }
-  else{
-    currentDisplayed = currentDisplayed + "2";
-    document.getElementById("display").innerHTML = currentDisplayed;
-  }
-})
-button3.addEventListener("click", function(){
-  if(currentDisplayed === "0" || currentDisplayed === "+" || currentDisplayed === "-"
-    || currentDisplayed === "*" || currentDisplayed === "/" || currentDisplayed === "%") {
-    currentDisplayed = "3"
-    document.getElementById("display").innerHTML = currentDisplayed;
-  }
-  else{
-    currentDisplayed = currentDisplayed + "3";
-    document.getElementById("display").innerHTML = currentDisplayed;
-  }
-})
 
-button4.addEventListener("click", function(){
-  if(currentDisplayed === "0" || currentDisplayed === "+" || currentDisplayed === "-"
-    || currentDisplayed === "*" || currentDisplayed === "/" || currentDisplayed === "%") {
-    currentDisplayed = "4"
-    document.getElementById("display").innerHTML = currentDisplayed;
-  }
-  else{
-    currentDisplayed = currentDisplayed + "4";
-    document.getElementById("display").innerHTML = currentDisplayed;
-  }
-})
-button5.addEventListener("click", function(){
-  if(currentDisplayed === "0" || currentDisplayed === "+" || currentDisplayed === "-"
-    || currentDisplayed === "*" || currentDisplayed === "/" || currentDisplayed === "%") {
-    currentDisplayed = "5"
-    document.getElementById("display").innerHTML = currentDisplayed;
-  }
-  else{
-    currentDisplayed = currentDisplayed + "5";
-    document.getElementById("display").innerHTML = currentDisplayed;
-  }
-})
-button6.addEventListener("click", function(){
-  if(currentDisplayed === "0" || currentDisplayed === "+" || currentDisplayed === "-"
-    || currentDisplayed === "*" || currentDisplayed === "/" || currentDisplayed === "%") {
-    currentDisplayed = "6"
-    document.getElementById("display").innerHTML = currentDisplayed;
-  }
-  else{
-    currentDisplayed = currentDisplayed + "6";
-    document.getElementById("display").innerHTML = currentDisplayed;
-  }
-})
-button7.addEventListener("click", function(){
-  if(currentDisplayed === "0" || currentDisplayed === "+" || currentDisplayed === "-"
-    || currentDisplayed === "*" || currentDisplayed === "/" || currentDisplayed === "%") {
-    currentDisplayed = "7"
-    document.getElementById("display").innerHTML = currentDisplayed;
-  }
-  else{
-    currentDisplayed = currentDisplayed + "7";
-    document.getElementById("display").innerHTML = currentDisplayed;
-  }
-})
-button8.addEventListener("click", function(){
-  if(currentDisplayed === "0" || currentDisplayed === "+" || currentDisplayed === "-"
-    || currentDisplayed === "*" || currentDisplayed === "/" || currentDisplayed === "%") {
-    currentDisplayed = "8"
-    document.getElementById("display").innerHTML = currentDisplayed;
-  }
-  else{
-    currentDisplayed = currentDisplayed + "8";
-    document.getElementById("display").innerHTML = currentDisplayed;
-  }
-})
-button9.addEventListener("click", function(){
-  if(currentDisplayed === "0" || currentDisplayed === "+" || currentDisplayed === "-"
-    || currentDisplayed === "*" || currentDisplayed === "/" || currentDisplayed === "%") {
-    currentDisplayed = "9"
-    document.getElementById("display").innerHTML = currentDisplayed;
-  }
-  else{
-    currentDisplayed = currentDisplayed + "9";
-    document.getElementById("display").innerHTML = currentDisplayed;
-  }
-})
+document.querySelectorAll(".number").forEach(function(b){
+    b.addEventListener("click", function(e){
+        let number = b.dataset.value
+        press_number(number);
+    })
+});
 
-buttondec.addEventListener("click", function(){
-  if(maxDecimals != 0) return;
-  else{
-    currentDisplayed = currentDisplayed + ",";
-    document.getElementById("display").innerHTML = currentDisplayed;
-  maxDecimals++;
-  }
-})
+document.querySelectorAll(".dec").forEach(function(b){
+    b.addEventListener("click", function(e){
+        add_decimal();
+    })
+});
 
-buttonC.addEventListener("click", function(){
-  clearNum();
-})
+document.querySelectorAll(".math").forEach(function(b){
+    b.addEventListener("click", function(e){
+        let op = b.dataset.value
+        press_op(op);
+    })
+});
 
-buttonsum.addEventListener("click", function(){
-  var sum1 = parseFloat(currentDisplayed);
-  currentDisplayed = "+";
-  document.getElementById("display").innerHTML = currentDisplayed;
-  buttoneq.addEventListener("click", function(){
-    var sum2 = parseFloat(currentDisplayed);
-    currentDisplayed = add(sum1,sum2)
-    document.getElementById("display").innerHTML = currentDisplayed;
-  });
+document.querySelectorAll(".equal").forEach(function(b){
+    b.addEventListener("click", function(e){
+        press_equal();
+    })
+});
 
-})
-// CLEAR NUM FUNCTION
-function clearNum(){
-  currentDisplayed = "0";
-  document.getElementById("display").innerHTML = currentDisplayed;
-  maxDecimals = 0;
+document.querySelectorAll(".clear").forEach(function(b){
+    b.addEventListener("click", function(e){
+        clear();
+    })
+});
 
+document.querySelectorAll(".clear").forEach(function(b){
+    b.addEventListener("click", function(e){
+        clear();
+    })
+});
+
+document.querySelectorAll(".return").forEach(function(b){
+    b.addEventListener("click", function(e){
+        if (current.length === 1) current = "0"
+        else current = current.slice(0, -1);
+        refresh();
+    })
+});
+
+
+
+
+function press_op(op){
+    if (current_op){
+      value = calculate(current_op,parseFloat(stored),parseFloat(current))
+      current = value;
+    }
+    needs_clear = true
+    stored = current;
+    current_op = op
+    refresh()
 }
 
 
-// MATH FUNCTIONS
-function add (num1,num2) {
-	return num1+num2;
+function press_equal(){
+  if (!current_op) return
+  current = calculate(current_op,parseFloat(stored),parseFloat(current));
+  current = parseFloat(current)
+  current = parseFloat(current.toFixed(6))
+  needs_clear = true
+  stored = ""
+  current_op = ""
+  refresh()
 }
 
-function subtract (num1,num2) {
-	return num1-num2;
+
+function add_decimal(){
+  if (decimal === 0){
+     current = current + ".";
+     decimal = 1;
+  } else return;
+  refresh();
 }
 
-function sum(array){
-total = 0;
-	for (var i = 0; i < array.length; i++) {
-		total += array[i]
-	}
-	return total;
+
+function press_number(number){
+  if (needs_clear) {
+    current = "0"
+    decimal = 0;
+    needs_clear = false
+  }
+  if (number === "0" && current === "0") return;
+  if (number != "0" && current === "0") current = number;
+  else current = current + number;
+  current = parseFloat(current)
+  current = parseFloat(current.toFixed(6))
+  refresh();
 }
 
-function multiply (array){
-total = 1;
-	for (var i = 0; i < array.length; i++) {
-		total = total * array[i]
-	}
-	return total;
+function clear(){
+  current = "0"
+  stored = "0"
+  current_op = ""
+  decimal = 0;
+  refresh();
+}
+
+function calculate(operation,a,b){
+  if (operation === "sum") return a+b;
+  else if (operation === "sub") return a-b;
+  else if (operation === "mult") return a*b;
+  else if (operation === "div") return a/b;
+  refresh();
+}
+
+
+
+
+function refresh(){
+  document.getElementById("display").innerHTML = current;
+
 }

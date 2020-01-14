@@ -4,29 +4,29 @@
     <meta charset="utf-8">
     <title>Calculaitor</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   </head>
   <body>
     <div class="calc-body">
       <div class="display" id="display">0</div>
-      <button type="button" class="first-row" id="buttonC" name="button">C</button>
-      <button type="button" class="first-row" id="buttonUN" name="button">UN</button>
-      <button type="button" class="first-row" id="buttonmod"name="button">%</button>
-      <button type="button" class="math" id="button/"name="button">/</button>
-      <button type="button" class="number" id="button7"name="button">7</button>
-      <button type="button" class="number" id="button8"name="button">8</button>
-      <button type="button" class="number" id="button9"name="button">9</button>
-      <button type="button" class="math" id="buttonX"name="button">X</button>
-      <button type="button" class="number" id="button4"name="button">4</button>
-      <button type="button" class="number" id="button5"name="button">5</button>
-      <button type="button" class="number" id="button6"name="button">6</button>
-      <button type="button" class="math" id="buttonsub"name="button">-</button>
-      <button type="button" class="number" id="button1"name="button">1</button>
-      <button type="button" class="number" id="button2"name="button">2</button>
-      <button type="button" class="number" id="button3"name="button">3</button>
-      <button type="button" class="math" id="buttonsum"name="button">+</button>
-      <button type="button" class="button0" id="button0"name="button0">0</button>
-      <button type="button" class="number" id="buttondec"name="button">,</button>
-      <button type="button" class="math" id="buttoneq"name="button">=</button>
+      <button type="button" class="clear" id="first-row" data-value="C">C</button>
+      <button type="button" class="return" id="return" data-value="return"name="button"><i class="fa fa-long-arrow-left"></i></button>
+      <button type="button" class="math" id="button/" data-value="div"name="button">/</button>
+      <button type="button" class="number" id="button7" data-value="7"name="button">7</button>
+      <button type="button" class="number" id="button8" data-value="8"name="button">8</button>
+      <button type="button" class="number" id="button9" data-value="9"name="button">9</button>
+      <button type="button" class="math" id="buttonX" data-value="mult"name="button">X</button>
+      <button type="button" class="number" id="button4" data-value="4"name="button">4</button>
+      <button type="button" class="number" id="button5" data-value="5"name="button">5</button>
+      <button type="button" class="number" id="button6" data-value="6"name="button">6</button>
+      <button type="button" class="math" id="buttonsub" data-value="sub"name="button">-</button>
+      <button type="button" class="number" id="button1" data-value="1"name="button">1</button>
+      <button type="button" class="number" id="button2" data-value="2"name="button">2</button>
+      <button type="button" class="number" id="button3" data-value="3"name="button">3</button>
+      <button type="button" class="math" id="buttonsum" data-value="sum"name="button">+</button>
+      <button type="button" class="number" id="button0" data-value="0"name="button0">0</button>
+      <button type="button" class="dec" id="buttondec" data-value=","name="button">.</button>
+      <button type="button" class="equal" id="buttoneq" data-value="="name="button">=</button>
 
     </div>
 
